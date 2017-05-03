@@ -1,0 +1,63 @@
+{% extends "home/layout.html" %} {% block body %}
+<section>
+    <div class="header">
+        <h2>CloudNote, moto</h2>
+        <p>moto3</p>
+        <p>moto2</p>
+
+        <div>
+            &nbsp; &nbsp;
+            <a class="btn btn-default" href="/login">login</a> &nbsp; &nbsp;
+
+            <a class="btn btn-default" href="/demo"> try</a>
+        </div>
+    </div>
+
+    <div class="preview" style="position: relative;">
+        <div>
+            <div class="img-header">
+                <img src="/static/images/home/mac-btns.png" />
+            </div>
+            <div id="webSliderContainer">
+                <img class="web-slider" data-text="Default theme - markdown" src="/static/images/slider/v2/default_markdown.png" />
+                <img class="web-slider hide-img" data-text="Default theme - rich editor" src="/static/images/slider/v2/simple_tinymce.png" />
+                <img class="web-slider hide-img" data-text="Simple theme - markdown" src="/static/images/slider/v2/simple_markdown.png" />
+                <img class="web-slider hide-img" data-text="Writting mode" src="/static/images/slider/v2/writting.png" />
+            </div>
+        </div>
+        <div class="slider-desc"><span id="webText">Default theme - markdown</span></div>
+        <div class="mobile">
+            <div class="mobile-header">
+                <img src="/static/images/home/mac-dot.png" />
+            </div>
+            <div id="mobileSliderContainer">
+                <img class="mobile-slider" data-text="Mobile" src="/static/images/slider/v2/mobile_simple_list.png" />
+                <img class="mobile-slider hide-img" data-text="Mobile markdown" src="/static/images/slider/v2/mobile_markdown.png" />
+            </div>
+            <div class="slider-desc mobile-text"><span id="mobileText">Default theme - markdown</span></div>
+        </div>
+    </div>
+</section>
+
+<div class="container" id="aboutLeanote">
+    <h2>aboutLeanote</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <h3>knowledge</h3>
+            <p>knowledgeInfo</p>
+        </div>
+        <div class="col-md-3">
+            <h3>blog</h3>
+            <p>blogInfo</p>
+        </div>
+        <div class="col-md-3">
+            <h3>share</h3>
+            <p>shareInfo</p>
+        </div>
+        <div class="col-md-3">
+            <h3>cooperation</h3>
+            <p>cooperationInfo</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="leanote,leanote.com,蚂蚁笔记">
+    <meta name="description" content="Leanote,蚂蚁笔记">
+    <meta name="author" content="leanote,蚂蚁笔记">
+    <title>
+        {% block title %}CloudNote {% endblock %}
+    </title>
+    {% block stylesheets %}
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/css/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet"> {% endblock %}
+    <script>
+        function log(o) {}
+    </script>
+</head>
+
+<body class="lang-zh">
+    <nav id="headerContainer" style="background-color:#fff" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+                <a class="navbar-brand" href="/index" id="logo">
+                    <img src="/static/images/logo/leanote_black.png" class="hide" title="leanote, " />
+                </a>
+            </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+                <div id="lang">
+                    <a data-lang="en-us">English</a>
+                    <a data-lang="de-de">Deutsch</a>
+                    <a data-lang="fr-fr">Français</a>
+                    <a data-lang="zh-cn">简体中文</a>
+                    <a data-lang="zh-hk">繁体中文</a>
+                    <a data-lang="pt-pt">Portugu&ecirc;s</a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="/index#" data-target="body" class="smooth-scroll">home</a></li>
+                    <li style="position: relative; margin-right: 3px;">
+                        <a href="http://bbs.leanote.com" target="_blank" class="">discussion</a>
+                    </li>
+
+                    <li><a id="leanoteBlog" href="http://lea.leanote.com" target="_blank" title="Leanote explore, leanote blog platform" class="">Leanote Explore</a></li>
+                    <li><a id="leanoteApp" href="http://app.leanote.com" target="_blank" title="Leanote App" class="">desktopApp</a></li>
+                    <li>
+                        <a href="http://leanote.org#donate" target="_blank" class="">donate</a>
+                    </li>
+
+                    <li><a href="http://leanote.org" target="_blank" title="leanote.org" class="">leanote.org</a></li>
+
+                    <li id="loginBtns">
+                        hi,
+                        <a href="noteUrl">myNote</a>
+                        <a href="/logout">logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body%} {% endblock %}}
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <i class="fa fa-envelope-o fa-3x icon-muted"></i>
+                    <h2>Contact</h2>
+                    <a href="http://weibo.com/leanotecom" target="_blank"><i class="fa fa-weibo"></i></a> / leanote@leanote.com
+                    <br />
+                </div>
+                <div class="col-md-6">
+                    <i class="fa fa-globe fa-3x icon-muted"></i>
+                    <h2>Join Us</h2>
+                    <a href="https://github.com/leanote/leanote">Github</a> / <a href="http://leanote.leanote.com/post/Leanote-groups">QQ Group</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-leanote">
+            Copyright © <a href="https://leanote.com">Leanote</a>
+            <br/> Proudly powered by <a href="https://leanote.com">Leanote</a>
+        </div>
+
+    </div>
+
+
+    <script src="/static/js/jquery-1.9.0.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+
+    <script src="/static/js/home/index.js"></script>
+
+    {% block script %} {% endblock %}
+</body>
+
+</html>
