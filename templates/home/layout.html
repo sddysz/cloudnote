@@ -59,11 +59,13 @@
 
                     <li><a href="http://leanote.org" target="_blank" title="leanote.org" class="">leanote.org</a></li>
 
+                    {% if userInfo.Email %}
                     <li id="loginBtns">
-                        hi,
-                        <a href="noteUrl">myNote</a>
+                        hi, {{userInfo.Username}}
+                        <a href="#">myNote</a>
                         <a href="/logout">logout</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

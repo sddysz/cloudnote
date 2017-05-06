@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'leanote';
-    src: url('../../fonts/leanote-font3/leanote.eot?-vcf23i');
-    src: url('../../fonts/leanote-font3/leanote.eot?#iefix-vcf23i') format('embedded-opentype'), url('../../fonts/leanote-font3/leanote.ttf?-vcf23i') format('truetype'), url('../../fonts/leanote-font3/leanote.woff?-vcf23i') format('woff'), url('../../fonts/leanote-font3/leanote.svg?-vcf23i#leanote') format('svg');
+    src: url('../../static/fonts/leanote-font3/leanote.eot?-vcf23i');
+    src: url('../../static/fonts/leanote-font3/leanote.eot?#iefix-vcf23i') format('embedded-opentype'), url('../../static/fonts/leanote-font3/leanote.ttf?-vcf23i') format('truetype'), url('../../static/fonts/leanote-font3/leanote.woff?-vcf23i') format('woff'), url('../../static/fonts/leanote-font3/leanote.svg?-vcf23i#leanote') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -52,28 +52,28 @@
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    src: local('Open Sans Light'), local('OpenSans-Light'), url('../fonts/open-sans2/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff') format('woff');
+    src: local('Open Sans Light'), local('OpenSans-Light'), url('../static/fonts/open-sans2/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: local('Open Sans'), local('OpenSans'), url('../fonts/open-sans2/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
+    src: local('Open Sans'), local('OpenSans'), url('../static/fonts/open-sans2/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
-    src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../fonts/open-sans2/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff') format('woff');
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url('../static/fonts/open-sans2/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Open Sans';
     font-style: italic;
     font-weight: 400;
-    src: local('Open Sans Italic'), local('OpenSans-Italic'), url('../fonts/open-sans2/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff') format('woff');
+    src: local('Open Sans Italic'), local('OpenSans-Italic'), url('../static/fonts/open-sans2/xjAJXh38I15wypJXxuGMBobN6UDyHWBl620a-IRfuBk.woff') format('woff');
 }
 
 #logo {

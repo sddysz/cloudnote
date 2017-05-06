@@ -1,23 +1,39 @@
 {
     "version": "0.2.0",
-    "configurations": [
-    {
-        "name": "Flask (old)",
-        "type": "python",
-        "request": "launch",
-        "stopOnEntry": false,
-        "pythonPath": "$python.pythonPath}",
-        "program": "${workspaceRoot}/run.py",
-        "cwd": "${workspaceRoot}",
-        "args": [],
-        "env": {},
-        "envFile": "${workspaceRoot}/.env",
-        "debugOptions": [
-            "WaitOnAbnormalExit",
-            "WaitOnNormalExit",
-            "RedirectOutput"
-        ]
-    },
+    "configurations": [{
+            "name": "Flask (old)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "$python.pythonPath}",
+            "program": "${workspaceRoot}/run.py",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "Flask (old)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "$python.pythonPath}",
+            "program": "${workspaceRoot}/run.py",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
         {
             "name": "Python",
             "type": "python",

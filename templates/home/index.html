@@ -1,4 +1,4 @@
-{% extends "home/layout.html" %} {% block body %}
+{% extends "home/layout.html" %} {% block title %} {{title}} {% endblock %} {% block body %}
 <section>
     <div class="header">
         <h2>CloudNote, moto</h2>
@@ -6,10 +6,8 @@
         <p>moto2</p>
 
         <div>
-            &nbsp; &nbsp;
-            <a class="btn btn-default" href="/login">login</a> &nbsp; &nbsp;
-
-            <a class="btn btn-default" href="/demo"> try</a>
+            &nbsp; &nbsp; {% if not userInfo.UserId %}
+            <a class="btn btn-default" href="/login">login</a> &nbsp; &nbsp;{% endif %}
         </div>
     </div>
 
