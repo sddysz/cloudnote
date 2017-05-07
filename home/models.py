@@ -66,3 +66,33 @@ class User(db.Model, UserMixin, CRUDMixin):
     usn = db.Column(db.Integer)
     # 需要全量同步的时间，如果>客户端的LastSyncTime, 则需要全量更新
     fullSyncBefore = db.Column(db.DateTime)
+
+    def check_password(self, password):
+        """Check passwords. If passwords match it returns true, else false."""
+
+        if self.pwd is None:
+            return False
+        return self.pwd == password
+
+    @classmethod
+    def authenticate(cls, login, password):
+        """A classmethod for authenticating users.
+        It returns the user object if the user/password combination is ok.
+        If the user has entered too often a wrong password, he will be locked
+        out of his account for a specified time.
+
+        :param login: This can be either a username or a email address.
+        :param password: The password that is connected to username and email.
+        """
+        user = cls.query.filter(db.or_(User.username == login,
+                                       User.email == login)).first()
+
+        if user is not None:
+            if user.check_password(password):
+                # reset them after a successful login attempt
+                user.login_attempts = 0
+                user.save()
+        # protection against account enumeration timing attacks
+        check_password_hash("dummy password", password)
+
+        raise AuthenticationError

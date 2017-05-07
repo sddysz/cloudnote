@@ -22,6 +22,8 @@ allows = Allows(throws=AuthorizationRequired)
 # Database
 db = SQLAlchemy()
 
+#login
+login_manager=LoginManager()
 
 # Celery
 celery = Celery("cloudNote")

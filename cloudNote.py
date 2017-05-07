@@ -5,6 +5,9 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
 from home.views import home
+from auth.views import auth
+from extensions import db,login_manager
+from home.models import User
 
 # create our little application :)
 
@@ -32,7 +35,7 @@ def create_app():
     #configure_app(app, config)
     #configure_celery_app(app, celery)
     configure_blueprints(app)
-    #configure_extensions(app)
+    configure_extensions(app)
     #configure_template_filters(app)
     #configure_context_processors(app)
     #configure_before_handlers(app)
@@ -50,10 +53,31 @@ def configure_app(app, config):
 
 def configure_blueprints(app):
     app.register_blueprint(home,url_prefix='')
+    app.register_blueprint(auth,url_prefix='')
+
+
+
+
+def configure_extensions(app):
+    """Configures the extensions."""
+
+    # Flask-SQLAlchemy
+    db.init_app(app)
     
 
+    @login_manager.user_loader
+    def load_user(user_id):
+        """Loads the user. Required by the `login` extension."""
+
+        user_instance = User.query.filter_by(id=user_id).first()
+        if user_instance:
+            return user_instance
+        else:
+            return None
+
+    login_manager.init_app(app)
+
+
 app =create_app()
-
-
 
 app.run()

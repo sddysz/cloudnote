@@ -23,7 +23,7 @@
                 <input id="from" type="hidden" value="{{from}}" />
                 <div class="form-group">
                     <label class="control-label">usernameOrEmail</label>
-                    <input type="text" class="form-control" id="email" name="email" value="{{email}}">
+                    <input type="text" class="form-control" id="email" name="email" >
                 </div>
                 <div class="form-group">
                     <label class="control-label">password</label>
@@ -36,22 +36,14 @@
 
                 <div class="clearfix">
                     <a href="/findPassword" class="pull-right m-t-xs"><small>forgetPassword</small></a>
-                    <button id="loginBtn" class="btn btn-success">login</button>
+                    <button id="loginBtn" type="button" class="btn btn-success">login</button>
                 </div>
-                <!--
-				<div class="line line-dashed"></div>
-				
-				<a href="#" id="github" class="btn btn-github btn-block m-b-sm"><i class="fa fa-github pull-left"></i>{{msg . "use"}} Github</a>
-				-->
+                
 
                 <div class="line line-dashed"></div>
 
                 <p class="text-muted text-center"><small>hasAcount</small></p>
 
-                {{if .openRegister}}
-                <a href="/register" class="btn btn-default btn-block">register</a> {{msg . "or"}} {{end}}
-
-                <a id="loginBtn" href="/demo" class="btn btn-default btn-block">try</a>
             </form>
         </div>
     </div>
@@ -66,12 +58,12 @@
     </p>
 </div>
 
-<script src="/js/jquery-1.9.0.min.js"></script>
-<script src="/js/bootstrap.js"></script>
+<script src="/static/js/jquery-1.9.0.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
 
 <script>
     $(function() {
-        var needCaptcha = {{needCaptcha}};
+        var needCaptcha = false;
 
         if (needCaptcha) {
             $("#captchaContainer").html($("#tCaptcha").html());
@@ -126,7 +118,7 @@
                 $("#loginBtn").html("login").removeClass("disabled");
                 if (e.Ok) {
                     $("#loginBtn").html("loginSuccess...");
-                    var from = $("#from").val() || "{{.noteUrl}}" || "/note";
+                    var from = $("#from").val() || "{{noteUrl}}" || "/note";
                     location.href = from;
                 } else {
                     if (e.Item && $.trim($("#captchaContainer").text()) == "") {
