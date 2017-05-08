@@ -21,7 +21,7 @@ from home.models import User
 
 
 
-def create_app():
+def create_app(config=None):
     """Creates the app.
 
     :param config: The configuration file or object.
@@ -32,7 +32,7 @@ def create_app():
     """
     app = Flask("cloudNote")
 
-    #configure_app(app, config)
+    configure_app(app, config)
     #configure_celery_app(app, celery)
     configure_blueprints(app)
     configure_extensions(app)
@@ -45,11 +45,7 @@ def create_app():
     return app
 
 def configure_app(app, config):
-        """Configures FlaskBB."""
-    # Use the default config and override it afterwards
-    # app.config.from_object('flaskbb.configs.default.DefaultConfig')
-
-   #
+    app.config.from_object('conf.conf.DefaultConfig')
 
 def configure_blueprints(app):
     app.register_blueprint(home,url_prefix='')

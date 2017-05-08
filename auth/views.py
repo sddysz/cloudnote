@@ -11,9 +11,9 @@
 """
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, url_for, request, render_template,redirect
+from flask import Blueprint, flash, redirect, url_for, request, render_template,redirect,jsonify
 from flask_login import current_user, login_user, login_required,logout_user, confirm_login, login_fresh
-
+from flask_babelplus import gettext as _
 from exceptions import AuthenticationError
 from home.models import User
 
@@ -33,17 +33,19 @@ def login( noteUrl=''):
 @auth.route("/doLogin", methods=["POST"])
 def doLogin():
     #Logs the user in.
+    msg=''
     email= request.form['email']
     pwd= request.form['pwd']
     try:
         user = User.authenticate(email, pwd)
         if not login_user(user, remember=False):
-            flash(_("In order to use your account you have to activate it "
+            msg = ("In order to use your account you have to activate it "
                     "through the link we have sent to your email "
-                    "address."), "danger")
+                    "address.")
+        
         return redirect_or_next(url_for("home.index"))
     except AuthenticationError:
-        flash(_("Wrong username or password."), "danger")
+        flash("Wrong username or password.")
 
     return render_template("home/login.html", noteUrl='')
     

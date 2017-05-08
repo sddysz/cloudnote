@@ -23,7 +23,7 @@ class User(db.Model, UserMixin, CRUDMixin):
     userId = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200))
     verified = db.Column(db.Boolean)
-    pwd = db.Column('password', db.String(120))
+    pwd = db.Column('pwd', db.String(120))
     username = db.Column(db.String(20))
     usernameRaw = db.Column(db.String(20))
     createTime = db.Column(db.DateTime)
