@@ -122,11 +122,6 @@
                     var from = $("#from").val() || "{{noteUrl}}" || "/note";
                     location.href = from;
                 } else {
-                    if (e.Item && $.trim($("#captchaContainer").text()) == "") {
-                        $("#captchaContainer").html($("#tCaptcha").html());
-                        needCaptcha = true
-                    }
-
                     showMsg(e.Msg);
                 }
             });
