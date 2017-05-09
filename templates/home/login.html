@@ -119,7 +119,7 @@
                 $("#loginBtn").html("login").removeClass("disabled");
                 if (e.Ok) {
                     $("#loginBtn").html("loginSuccess...");
-                    var from = $("#from").val() || "{{noteUrl}}" || "/note";
+                    var from = "/note";
                     location.href = from;
                 } else {
                     showMsg(e.Msg);

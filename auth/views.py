@@ -26,7 +26,7 @@ def login( noteUrl=''):
     #Logs the user in.
     print (current_user)
     if current_user is not None and current_user.is_authenticated:
-        return redirect(url_for("home.index"))   
+        return redirect(url_for("home.views.index"))   
 
     return render_template("home/login.html",
                            noteUrl=noteUrl)
@@ -47,3 +47,11 @@ def doLogin():
     except AuthenticationError:
         return jsonify({"OK" : False, "Msg" : "Wrong username or password."})
     return jsonify( {"OK":True, "Msg":msg})
+
+
+@auth.route("/logout")
+@login_required
+def logout():
+    """Logs the user out."""
+    logout_user()
+    return redirect(url_for("home.views.index"))
