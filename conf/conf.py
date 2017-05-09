@@ -63,7 +63,7 @@ class DefaultConfig(object):
     #SQLALCHEMY_DATABASE_URI = "postgresql://flaskbb@localhost:5432/flaskbb"
     # For SQLite:
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + basedir + '\\' + \
-                              'sqlite.db'
+                              'db\\sqlite.db'
     print(SQLALCHEMY_DATABASE_URI)
 
     # This option will be removed as soon as Flask-SQLAlchemy removes it.

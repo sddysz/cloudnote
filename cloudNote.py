@@ -7,7 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 from home.views import home
 from auth.views import auth
 from extensions import db,login_manager
-from home.models import User
+from home.user import User
 
 # create our little application :)
 

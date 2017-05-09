@@ -1,7 +1,9 @@
+drop table users;
+
 create table users (
-     userId integer primary key autoincrement,
+    id integer primary key autoincrement,
     email text,
-    verified Integer,
+    is_active Integer,
     pwd  text,
     username  text,
     usernameRaw  text,
@@ -38,3 +40,5 @@ create table users (
     usn Integer,
     fullSyncBefore Integer
 );
+
+insert into users (email,pwd,username,is_active) values ('sddysz@126.com','111111','sddysz',1);

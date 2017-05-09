@@ -11,7 +11,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import url_for
 from flask_login import UserMixin, AnonymousUserMixin
-
+from flask_login._compat import text_type
 from extensions import db
 from exceptions import AuthenticationError
 from utils.database import CRUDMixin, UTCDateTime
@@ -20,9 +20,9 @@ from utils.database import CRUDMixin, UTCDateTime
 class User(db.Model, UserMixin, CRUDMixin):
     __tablename__ = "users"
 
-    userId = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(200))
-    verified = db.Column(db.Boolean)
+    is_active = db.Column(db.Boolean)
     pwd = db.Column('pwd', db.String(120))
     username = db.Column(db.String(20))
     usernameRaw = db.Column(db.String(20))
@@ -66,10 +66,16 @@ class User(db.Model, UserMixin, CRUDMixin):
     usn = db.Column(db.Integer)
     # 需要全量同步的时间，如果>客户端的LastSyncTime, 则需要全量更新
     fullSyncBefore = db.Column(db.DateTime)
+    
 
+    @property
+    def is_anonymous(self):
+        return False
+        
     def check_password(self, password):
         """Check passwords. If passwords match it returns true, else false."""
-
+        print(self.id)
+        print(password)
         if self.pwd is None:
             return False
         return self.pwd == password
@@ -86,13 +92,10 @@ class User(db.Model, UserMixin, CRUDMixin):
         """
         user = cls.query.filter(db.or_(User.username == login,
                                        User.email == login)).first()
-
+       
         if user is not None:
             if user.check_password(password):
-                # reset them after a successful login attempt
-                user.login_attempts = 0
-                user.save()
-        # protection against account enumeration timing attacks
-        check_password_hash("dummy password", password)
-
-        raise AuthenticationError
+                return user
+            raise AuthenticationError
+        else:
+            raise AuthenticationError
