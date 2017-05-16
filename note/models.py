@@ -45,5 +45,27 @@ class Note(db.Model):
 
 
 
+    def getNotes(self, userId):
+            return self.query.filter(Notebook.userId == userId).all()
+
+    def getNoteByNoteId(self, noteId):
+            return self.query.filter(Notebook.noteId == noteId).first()
 
 
+
+
+
+
+class NoteContent(db.Model):
+    __tablename__ = "notecontent"
+    noteId = db.Column(db.Integer, primary_key=True) 
+    userId = db.Column(db.Integer)
+    isBlog  = db.Column(db.Boolean) # 为了搜索博客
+    content = db.Column(db.String)
+    abstract = db.Column(db.String)  #摘要, 有html标签, 比content短, 在博客展示需要, 不放在notes表中
+    createdTime  = db.Column(db.DateTime)
+    updatedTime = db.Column(db.DateTime)
+    updatedUserId = db.Column(db.Integer) # 如果共享了, 并可写, 那么可能是其它他修改了
+
+    def getNoteByNoteId(self, noteId, noteOwner):
+        return self.query.filter( db.and_(NoteContent.noteId == noteId,NoteContent.userId == noteOwner)).first()

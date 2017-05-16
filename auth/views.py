@@ -24,7 +24,6 @@ auth = Blueprint("auth", __name__)
 @auth.route("/login", methods=["GET"])
 def login( noteUrl=''):
     #Logs the user in.
-    print (current_user)
     if current_user is not None and current_user.is_authenticated:
         return redirect(url_for("home.views.index"))   
 

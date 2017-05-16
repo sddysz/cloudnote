@@ -74,8 +74,7 @@ class User(db.Model, UserMixin, CRUDMixin):
         
     def check_password(self, password):
         """Check passwords. If passwords match it returns true, else false."""
-        print(self.id)
-        print(password)
+       
         if self.pwd is None:
             return False
         return self.pwd == password

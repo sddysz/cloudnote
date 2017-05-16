@@ -20,6 +20,8 @@ class Notebook(db.Model, CRUDMixin):
     usn = db.Column(db.Integer)
     isDeleted = db.Column(db.Boolean)
 
+    def getNotebooks(self, userId):
+        return self.query.filter(Notebook.userId == userId).all()
 
 
 
