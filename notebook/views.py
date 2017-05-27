@@ -12,7 +12,7 @@ from home.user import User
 note = Blueprint("notebook", __name__)
 
 
-@auth.route("/index", methods=["GET"])
+@note.route("/index", methods=["GET"])
 def index( ):
     return render_template('notebook.Index')
     #Logs the user in.
