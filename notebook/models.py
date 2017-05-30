@@ -96,9 +96,62 @@ class Notebook(db.Model, CRUDMixin):
     def getNotebook(self, notebookId):
         return self.query.filter(and_(Notebook.userId == userId,Notebook.id == notebookId)).one()
 
-    def GeSyncNotebooks(self,userId , afterUsn, maxEntry ):
-        notebooks= []
-        q := db.Notebooks.Find(bson.M{"UserId": bson.ObjectIdHex(userId), "Usn": bson.M{"$gt": afterUsn}})
-        q.Sort("Usn").Limit(maxEntry).All(&notebooks)
-        return notebooks
-  
+    def geSyncNotebooks(self,userId , afterUsn, maxEntry ):
+        return self.query.filter(_and(Notebook.userId==userId,Notebook.Usn>afterUsn)).order_by(Notebook.Usn).limit(maxEntry).all()
+         
+    # 得到用户下所有的notebook
+    # 排序好之后返回
+    # [ok]
+    def getNotebooks(userId):
+      
+        query=self.query.filter(_or(Notebook.isDeleted==isDeleted,Notebook.IsDeleted==None)).filter(Notebook.UserId==userId)
+        userNotebooks=query.all()
+        if len(userNotebooks) == 0:
+            return None
+
+        return ParseAndSortNotebooks(userNotebooks, true, true)
+
+
+        # 添加
+    def addNotebook(notebook):
+
+        notebook.UrlTitle = self.getUrTitle(notebook.UserId, notebook.Title, "notebook", notebook.NotebookId.Hex())
+        notebook.Usn = userService.IncrUsn(notebook.UserId)
+        now = time.Now()
+        notebook.CreatedTime = now
+        notebook.UpdatedTime = now
+        Notebooks.Insert(notebook)
+        if err != nil {
+            return false, notebook
+        }
+        return true, notebook
+
+// 更新笔记, api
+func (this *NotebookService) UpdateNotebookApi(userId, notebookId, title, parentNotebookId string, seq, usn int) (bool, string, info.Notebook) {
+	if notebookId == "" {
+		return false, "notebookIdNotExists", info.Notebook{}
+	}
+
+	// 先判断usn是否和数据库的一样, 如果不一样, 则冲突, 不保存
+	notebook := this.GetNotebookById(notebookId)
+	// 不存在
+	if notebook.NotebookId == "" {
+		return false, "notExists", notebook
+	} else if notebook.Usn != usn {
+		return false, "conflict", notebook
+	}
+	notebook.Usn = userService.IncrUsn(userId)
+	notebook.Title = title
+
+	updates := bson.M{"Title": title, "Usn": notebook.Usn, "Seq": seq, "UpdatedTime": time.Now()}
+	if parentNotebookId != "" && bson.IsObjectIdHex(parentNotebookId) {
+		updates["ParentNotebookId"] = bson.ObjectIdHex(parentNotebookId)
+	} else {
+		updates["ParentNotebookId"] = ""
+	}
+	ok := db.UpdateByIdAndUserIdMap(db.Notebooks, notebookId, userId, updates)
+	if ok {
+		return ok, "", this.GetNotebookById(notebookId)
+	}
+	return false, "", notebook
+}
