@@ -6,6 +6,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 from home.views import home
 from auth.views import auth
+from note.views import note
 from extensions import db,login_manager
 from home.user import User
 
@@ -50,7 +51,7 @@ def configure_app(app, config):
 def configure_blueprints(app):
     app.register_blueprint(home,url_prefix='')
     app.register_blueprint(auth,url_prefix='')
-
+    app.register_blueprint(note,url_prefix='/note')
 
 
 

@@ -9,10 +9,10 @@ from exceptions import AuthenticationError
 from home.user import User
 
 
-note = Blueprint("notebook", __name__)
+notebook = Blueprint("notebook", __name__)
 
 
-@note.route("/index", methods=["GET"])
+@notebook.route("/index", methods=["GET"])
 def index( ):
     return render_template('notebook.Index')
     #Logs the user in.

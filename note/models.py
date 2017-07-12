@@ -50,7 +50,8 @@ class Note(db.Model):
 
     def getNoteByNoteId(self, noteId):
             return self.query.filter(Notebook.noteId == noteId).first()
-
+    def getNoteById(self, noteId):
+            return self.query.filter(Notebook.noteId == noteId).first()
 
 
 

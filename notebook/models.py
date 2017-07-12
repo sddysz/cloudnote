@@ -102,9 +102,9 @@ class Notebook(db.Model, CRUDMixin):
     # 得到用户下所有的notebook
     # 排序好之后返回
     # [ok]
-    def getNotebooks(userId):
+    def getNotebooks(self,userId):
       
-        query=self.query.filter(_or(Notebook.isDeleted==isDeleted,Notebook.IsDeleted==None)).filter(Notebook.UserId==userId)
+        query=self.query.filter(db.or_(Notebook.isDeleted==False,Notebook.isDeleted==None)).filter(Notebook.userId==userId)
         userNotebooks=query.all()
         if len(userNotebooks) == 0:
             return None
@@ -113,45 +113,15 @@ class Notebook(db.Model, CRUDMixin):
 
 
         # 添加
-    def addNotebook(notebook):
+    def addNotebook(self,notebook):
 
-        notebook.UrlTitle = self.getUrTitle(notebook.UserId, notebook.Title, "notebook", notebook.NotebookId.Hex())
-        notebook.Usn = userService.IncrUsn(notebook.UserId)
+        notebook.UrlTitle = self.getUrTitle(notebook.userId, notebook.title, "notebook", notebook.NotebookId)
+        notebook.Usn = userService.IncrUsn(notebook.userId)
         now = time.Now()
         notebook.CreatedTime = now
         notebook.UpdatedTime = now
         Notebooks.Insert(notebook)
-        if err != nil {
-            return false, notebook
-        }
         return true, notebook
 
-// 更新笔记, api
-func (this *NotebookService) UpdateNotebookApi(userId, notebookId, title, parentNotebookId string, seq, usn int) (bool, string, info.Notebook) {
-	if notebookId == "" {
-		return false, "notebookIdNotExists", info.Notebook{}
-	}
-
-	// 先判断usn是否和数据库的一样, 如果不一样, 则冲突, 不保存
-	notebook := this.GetNotebookById(notebookId)
-	// 不存在
-	if notebook.NotebookId == "" {
-		return false, "notExists", notebook
-	} else if notebook.Usn != usn {
-		return false, "conflict", notebook
-	}
-	notebook.Usn = userService.IncrUsn(userId)
-	notebook.Title = title
-
-	updates := bson.M{"Title": title, "Usn": notebook.Usn, "Seq": seq, "UpdatedTime": time.Now()}
-	if parentNotebookId != "" && bson.IsObjectIdHex(parentNotebookId) {
-		updates["ParentNotebookId"] = bson.ObjectIdHex(parentNotebookId)
-	} else {
-		updates["ParentNotebookId"] = ""
-	}
-	ok := db.UpdateByIdAndUserIdMap(db.Notebooks, notebookId, userId, updates)
-	if ok {
-		return ok, "", this.GetNotebookById(notebookId)
-	}
-	return false, "", notebook
-}
+    # 更新笔记, api
+    
